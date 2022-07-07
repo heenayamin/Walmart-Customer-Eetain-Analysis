@@ -1,82 +1,58 @@
-# Walmart-Customer-Eetain-Analysis
+# Retail Analysis with Walmart Data
 Customer Service Requests Analysis
 DESCRIPTION
 
-Background of Problem Statement :
+One of the leading retail stores in the US, Walmart, would like to predict the sales and demand accurately. There are certain events and holidays which impact sales on each day. There are sales data available for 45 stores of Walmart. The business is facing a challenge due to unforeseen demands and runs out of stock some times, due to the inappropriate machine learning algorithm. An ideal ML algorithm will predict demand accurately and ingest factors like economic conditions including CPI, Unemployment Index, etc.
 
-NYC 311's mission is to provide the public with quick and easy access to all New York City government services and information while offering the best customer service. Each day, NYC311 receives thousands of requests related to several hundred types of non-emergency services, including noise complaints, plumbing issues, and illegally parked cars. These requests are received by NYC311 and forwarded to the relevant agencies such as the police, buildings, or transportation. The agency responds to the request, addresses it, and then closes it.
+Walmart runs several promotional markdown events throughout the year. These markdowns precede prominent holidays, the four largest of all, which are the Super Bowl, Labour Day, Thanksgiving, and Christmas. The weeks including these holidays are weighted five times higher in the evaluation than non-holiday weeks. Part of the challenge presented by this competition is modeling the effects of markdowns on these holiday weeks in the absence of complete/ideal historical data. Historical sales data for 45 Walmart stores located in different regions are available.
 
-Problem Objective :
+Dataset Description
 
-Perform a service request data analysis of New York City 311 calls. You will focus on the data wrangling techniques to understand the pattern in the data and also visualize the major complaint types.
-Domain: Customer Service
+This is the historical data that covers sales from 2010-02-05 to 2012-11-01, in the file Walmart_Store_sales. Within this file you will find the following fields:
 
-Analysis Tasks to be performed:
+Store - the store number
 
-(Perform a service request data analysis of New York City 311 calls) 
+Date - the week of sales
 
-Import a 311 NYC service request.
-Read or convert the columns ‘Created Date’ and Closed Date’ to datetime datatype and create a new column ‘Request_Closing_Time’ as the time elapsed between request creation and request closing. (Hint: Explore the package/module datetime)
-Provide major insights/patterns that you can offer in a visual format (graphs or tables); at least 4 major conclusions that you can come up with after generic data mining.
-Order the complaint types based on the average ‘Request_Closing_Time’, grouping them for different locations.
-Perform a statistical test for the following:
-Please note: For the below statements you need to state the Null and Alternate and then provide a statistical test to accept or reject the Null Hypothesis along with the corresponding ‘p-value’.
+Weekly_Sales -  sales for the given store
 
-Whether the average response time across complaint types is similar or not (overall)
-Are the type of complaint or service requested and location related?
-Dataset Description :
+Holiday_Flag - whether the week is a special holiday week 1 – Holiday week 0 – Non-holiday week
 
-Field	Description
-Unique Key	(Plain text) - Unique identifier for the complaints
-Created Date	(Date and Time) - The date and time on which the complaint is raised
-Closed Date	(Date and Time)  - The date and time on which the complaint is closed
-Agency	(Plain text) - Agency code
-Agency Name	(Plain text) - Name of the agency
-Complaint Type	(Plain text) - Type of the complaint
-Descriptor	(Plain text) - Complaint type label (Heating - Heat, Traffic Signal Condition - Controller)
-Location Type	(Plain text) - Type of the location (Residential, Restaurant, Bakery, etc)
-Incident Zip	(Plain text) - Zip code for the location
-Incident Address	(Plain text) - Address of the location
-Street Name	(Plain text) - Name of the street
-Cross Street 1	(Plain text) - Detail of cross street
-Cross Street 2	(Plain text) - Detail of another cross street
-Intersection Street 1	(Plain text) - Detail of intersection street if any
-Intersection Street 2	(Plain text) - Detail of another intersection street if any
-Address Type	(Plain text) - Categorical (Address or Intersection)
-City	(Plain text) - City for the location
-Landmark	(Plain text) - Empty field
-Facility Type	(Plain text) - N/A
-Status	(Plain text) - Categorical (Closed or Pending)
-Due Date	(Date and Time) - Date and time for the pending complaints
-Resolution Action Updated Date	(Date and Time) - Date and time when the resolution was provided
-Community Board	(Plain text) - Categorical field (specifies the community board with its code)
-Borough	(Plain text) - Categorical field (specifies the community board)
-X Coordinate	(State Plane) (Number)
-Y Coordinate	(State Plane) (Number)
-Park Facility Name	(Plain text) - Unspecified
-Park Borough	(Plain text) - Categorical (Unspecified, Queens, Brooklyn etc)
-School Name	(Plain text) - Unspecified
-School Number	(Plain text)  - Unspecified
-School Region	(Plain text)  - Unspecified
-School Code	(Plain text)  - Unspecified
-School Phone Number	(Plain text)  - Unspecified
-School Address	(Plain text)  - Unspecified
-School City	(Plain text)  - Unspecified
-School State	(Plain text)  - Unspecified
-School Zip	(Plain text)  - Unspecified
-School Not Found	(Plain text)  - Empty Field
-School or Citywide Complaint	(Plain text)  - Empty Field
-Vehicle Type	(Plain text)  - Empty Field
-Taxi Company Borough	(Plain text)  - Empty Field
-Taxi Pick Up Location	(Plain text)  - Empty Field
-Bridge Highway Name	(Plain text)  - Empty Field
-Bridge Highway Direction	(Plain text)  - Empty Field
-Road Ramp	(Plain text)  - Empty Field
-Bridge Highway Segment	(Plain text)  - Empty Field
-Garage Lot Name	(Plain text)  - Empty Field
- 
-Ferry Direction	(Plain text)  - Empty Field
-Ferry Terminal Name	(Plain text)  - Empty Field
-Latitude	(Number) - Latitude of the location
-Longitude	(Number) - Longitude of the location
-Location	(Location) - Coordinates (Latitude, Longitude)
+Temperature - Temperature on the day of sale
+
+Fuel_Price - Cost of fuel in the region
+
+CPI – Prevailing consumer price index
+
+Unemployment - Prevailing unemployment rate
+
+Holiday Events
+
+Super Bowl: 12-Feb-10, 11-Feb-11, 10-Feb-12, 8-Feb-13
+Labour Day: 10-Sep-10, 9-Sep-11, 7-Sep-12, 6-Sep-13
+Thanksgiving: 26-Nov-10, 25-Nov-11, 23-Nov-12, 29-Nov-13
+Christmas: 31-Dec-10, 30-Dec-11, 28-Dec-12, 27-Dec-13
+
+Analysis Tasks
+
+Basic Statistics tasks
+
+Which store has maximum sales
+
+Which store has maximum standard deviation i.e., the sales vary a lot. Also, find out the coefficient of mean to standard deviation
+
+Which store/s has good quarterly growth rate in Q3’2012
+
+Some holidays have a negative impact on sales. Find out holidays which have higher sales than the mean sales in non-holiday season for all stores together
+
+Provide a monthly and semester view of sales in units and give insights
+
+Statistical Model
+
+For Store 1 – Build  prediction models to forecast demand
+
+Linear Regression – Utilize variables like date and restructure dates as 1 for 5 Feb 2010 (starting from the earliest date in order). Hypothesize if CPI, unemployment, and fuel price have any impact on sales.
+
+Change dates into days by creating new variable.
+
+Select the model which gives best accuracy.
